@@ -36,7 +36,7 @@ class RecordComprendTaskStack(core.Stack):
         # create dynamo table
         tracking_task_table = aws_dynamodb.Table(
             self, "TrackingTaskTable",
-            table_name="TrackingTask2",
+            table_name="TrackingTask",
             partition_key=aws_dynamodb.Attribute(
                 name="ContactId",
                 type=aws_dynamodb.AttributeType.STRING
@@ -63,7 +63,7 @@ class RecordComprendTaskStack(core.Stack):
                                                 code=aws_lambda.Code.from_asset("./assets", exclude=["**", "!TrackContactTask.py"]),
                                                 description='Lambda function to track contact info and task created for the contact',
                                                 timeout=core.Duration.seconds(10),
-                                                role=tracking_task_lambda_role
+                                                role=tracking_task_lambda_role,                                                
                                                 )
         
         # grant permission to lambda to write to demo table
